@@ -239,6 +239,18 @@ export default function Contact() {
                   Your message has been sent successfully! I will get back to you shortly.
                 </motion.div>
               )}
+
+              {status === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="mt-4 p-4 rounded-lg bg-red-950/40 border border-red-500/30 text-red-400 text-sm font-mono flex items-center gap-2"
+                >
+                  <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
+                  Oops! Something went wrong while sending your message. Please try again.
+                </motion.div>
+              )}
             </AnimatePresence>
           </motion.div>
         </div>

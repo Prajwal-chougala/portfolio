@@ -11,10 +11,12 @@
   --color-text-muted: #64748b;
   --color-text-body: #334155;
   --color-text-heading: #0f172a;
-  --color-accent-purple: #0284c7;  /* Sky Blue Primary */
-  --color-accent-cyan: #0ea5e9;    /* Sky Blue Secondary */
-  --color-accent-teal: #0d9488;    /* Soft Teal Tertiary */
-  --color-accent-magenta: #2563eb; /* Royal Blue */
+  
+  /* High-contrast colors for Light Mode (WCAG compliant with white text) */
+  --color-accent-purple: #6d28d9;  /* Rich Violet */
+  --color-accent-cyan: #0284c7;    /* Strong Sky Blue */
+  --color-accent-teal: #0f766e;    /* Deep Teal */
+  --color-accent-magenta: #c2185b; /* Rich Pink/Magenta */
 
   --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), "JetBrains Mono", monospace;
@@ -30,6 +32,13 @@ html.dark {
   --color-text-muted: #94a3b8;
   --color-text-body: #cbd5e1;
   --color-text-heading: #f1f5f9;
+  
+  /* Redefined colors for Dark Mode (vibrant, glowing values) */
+  --color-accent-purple: #c084fc;  /* Bright Purple */
+  --color-accent-cyan: #22d3ee;    /* Bright Cyan */
+  --color-accent-teal: #2dd4bf;    /* Bright Teal */
+  --color-accent-magenta: #f43f5e; /* Bright Magenta */
+  
   --theme-glass-bg: rgba(30, 41, 59, 0.85);
   --theme-glass-border: rgba(14, 165, 233, 0.15);
   --theme-glass-shadow: rgba(0, 0, 0, 0.2);
