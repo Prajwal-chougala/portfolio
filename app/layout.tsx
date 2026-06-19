@@ -4,6 +4,7 @@ import './globals.css';
 import Navbar from './components/layout/navbar';
 import Footer from './components/layout/footer';
 import AntigravityBackground from './components/effects/antigravity-background';
+import SplashScreen from './components/effects/splash-screen';
 
 const inter = Inter({
   variable: '--font-geist-sans',
@@ -57,11 +58,14 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-deep text-text-body relative">
-        <AntigravityBackground />
-        <Navbar />
-        <main className="flex-1 w-full relative z-10">{children}</main>
-        <Footer />
+        <SplashScreen>
+          <AntigravityBackground />
+          <Navbar />
+          <main className="flex-1 w-full relative z-10">{children}</main>
+          <Footer />
+        </SplashScreen>
       </body>
     </html>
   );
 }
+
