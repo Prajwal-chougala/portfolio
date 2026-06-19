@@ -152,7 +152,8 @@ const FRAGMENT_SHADER = `#version 300 es
     activeColor = mix(activeColor, uColorThree, p2 * 0.5 + 0.5);
     
     vec3 finalColor = mix(uColorBase, activeColor, smoothstep(0.1, 0.8, vSize));
-    float finalAlpha = alpha * mix(0.4, 0.95, vSize);
+    // Soft opacity to ensure it is not too bright on mobile/dark mode
+    float finalAlpha = alpha * mix(0.18, 0.75, vSize);
 
     // Apply color
     fragColor = vec4(finalColor, finalAlpha);
@@ -203,9 +204,10 @@ export default function AntigravityBackground() {
 
     gl.useProgram(program);
 
-    // Grid details
-    const countX = 100;
-    const countY = 55;
+    // Grid details - dynamically scaled down on mobile/tablet to prevent lag
+    const isMobileDevice = window.innerWidth < 768;
+    const countX = isMobileDevice ? 40 : 100;
+    const countY = isMobileDevice ? 25 : 55;
     const count = countX * countY;
 
     // Local coordinates of each particle quad
@@ -349,7 +351,9 @@ export default function AntigravityBackground() {
 
     // Resize handling
     const resize = () => {
-      const dpr = window.devicePixelRatio || 1;
+      // Reduce DPR resolution on mobile to save fill rate & GPU rendering time
+      const isMobile = window.innerWidth < 768;
+      const dpr = isMobile ? Math.min(window.devicePixelRatio || 1, 1.2) : (window.devicePixelRatio || 1);
       const w = window.innerWidth;
       const h = window.innerHeight;
       canvas.width = w * dpr;

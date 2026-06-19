@@ -11,15 +11,20 @@
   --color-text-muted: #64748b;
   --color-text-body: #334155;
   --color-text-heading: #0f172a;
-  
+
   /* High-contrast colors for Light Mode (WCAG compliant with white text) */
-  --color-accent-purple: #6d28d9;  /* Rich Violet */
-  --color-accent-cyan: #0284c7;    /* Strong Sky Blue */
-  --color-accent-teal: #0f766e;    /* Deep Teal */
-  --color-accent-magenta: #c2185b; /* Rich Pink/Magenta */
+  --color-accent-purple: #6d28d9;
+  /* Rich Violet */
+  --color-accent-cyan: #0284c7;
+  /* Strong Sky Blue */
+  --color-accent-teal: #0f766e;
+  /* Deep Teal */
+  --color-accent-magenta: #c2185b;
+  /* Rich Pink/Magenta */
 
   --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), "JetBrains Mono", monospace;
+  --font-display: var(--font-syne), var(--font-geist-sans), system-ui, sans-serif;
 }
 
 /* ========== DARK THEME OVERRIDES ========== */
@@ -32,13 +37,17 @@ html.dark {
   --color-text-muted: #94a3b8;
   --color-text-body: #cbd5e1;
   --color-text-heading: #f1f5f9;
-  
+
   /* Redefined colors for Dark Mode (vibrant, glowing values) */
-  --color-accent-purple: #c084fc;  /* Bright Purple */
-  --color-accent-cyan: #22d3ee;    /* Bright Cyan */
-  --color-accent-teal: #2dd4bf;    /* Bright Teal */
-  --color-accent-magenta: #f43f5e; /* Bright Magenta */
-  
+  --color-accent-purple: #c084fc;
+  /* Bright Purple */
+  --color-accent-cyan: #22d3ee;
+  /* Bright Cyan */
+  --color-accent-teal: #2dd4bf;
+  /* Bright Teal */
+  --color-accent-magenta: #f43f5e;
+  /* Bright Magenta */
+
   --theme-glass-bg: rgba(30, 41, 59, 0.85);
   --theme-glass-border: rgba(14, 165, 233, 0.15);
   --theme-glass-shadow: rgba(0, 0, 0, 0.2);
@@ -145,8 +154,10 @@ body {
 }
 
 .section-title {
-  font-size: 2rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   color: var(--color-text-heading);
   text-align: center;
   margin-bottom: 0.75rem;
@@ -165,18 +176,37 @@ body {
 /* ========== KEYFRAME ANIMATIONS ========== */
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes slide-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes counter-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
 }
 
 /* ========== RESPONSIVE SECTION PADDING ========== */

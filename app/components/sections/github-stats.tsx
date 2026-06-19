@@ -40,14 +40,14 @@ const mockLanguages = [
 
 export default function GitHubStats() {
   return (
-    <section id="github" className="py-24 relative overflow-hidden bg-deep/50">
+    <section id="github" className="py-24 relative overflow-hidden bg-deep/20 border-t border-border-subtle/25">
       <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
         {/* Title */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: false, margin: '-80px' }}
+          transition={{ duration: 0.5 }}
         >
           <h2 className="section-title">GitHub Activity</h2>
           <p className="section-subtitle">
@@ -55,27 +55,28 @@ export default function GitHubStats() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-5xl mx-auto items-stretch">
           {/* Left Column: Language and Stats */}
           <div className="col-span-1 lg:col-span-6 flex flex-col gap-6">
             {/* Quick Metrics */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              className="p-6 glass-card border border-border-subtle grid grid-cols-3 gap-4 text-center"
+              viewport={{ once: false, margin: '-80px' }}
+              transition={{ duration: 0.45 }}
+              className="p-6 glass-card border border-border-subtle/50 grid grid-cols-3 gap-4 text-center bg-surface/5"
             >
               <div>
-                <span className="text-2xl font-bold font-mono text-accent-purple">15</span>
-                <span className="text-[10px] text-text-muted font-mono block mt-1 uppercase">Repositories</span>
+                <span className="text-xl md:text-2xl font-bold font-mono text-accent-purple">15</span>
+                <span className="text-[9px] text-text-muted font-mono block mt-1 uppercase tracking-wider">Repositories</span>
               </div>
-              <div className="border-x border-border-subtle/40">
-                <span className="text-2xl font-bold font-mono text-accent-cyan">23</span>
-                <span className="text-[10px] text-text-muted font-mono block mt-1 uppercase">Stars</span>
+              <div className="border-x border-border-subtle/30">
+                <span className="text-xl md:text-2xl font-bold font-mono text-accent-cyan">23</span>
+                <span className="text-[9px] text-text-muted font-mono block mt-1 uppercase tracking-wider">Stars</span>
               </div>
               <div>
-                <span className="text-2xl font-bold font-mono text-accent-teal">450+</span>
-                <span className="text-[10px] text-text-muted font-mono block mt-1 uppercase">Commits</span>
+                <span className="text-xl md:text-2xl font-bold font-mono text-accent-teal">450+</span>
+                <span className="text-[9px] text-text-muted font-mono block mt-1 uppercase tracking-wider">Commits</span>
               </div>
             </motion.div>
 
@@ -83,29 +84,29 @@ export default function GitHubStats() {
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="p-6 glass-card border border-border-subtle flex flex-col gap-4"
+              viewport={{ once: false, margin: '-80px' }}
+              transition={{ duration: 0.45, delay: 0.05 }}
+              className="p-6 glass-card border border-border-subtle/50 flex flex-col gap-5 bg-surface/5"
             >
-              <span className="text-xs font-mono font-bold text-text-heading flex items-center gap-2">
+              <span className="text-[10px] font-mono font-bold text-text-heading flex items-center gap-2 uppercase tracking-wider select-none">
                 <BookOpen className="w-4 h-4 text-accent-cyan" />
-                LANGUAGE METRICS
+                Language Metrics
               </span>
 
               {/* Stacked Percentage Bar */}
-              <div className="h-2 w-full rounded-full bg-surface overflow-hidden flex">
+              <div className="h-2 w-full rounded-full bg-surface/50 overflow-hidden flex select-none">
                 {mockLanguages.map((lang) => (
                   <div
                     key={lang.name}
                     style={{ width: `${lang.percentage}%`, backgroundColor: lang.color }}
-                    className="h-full"
+                    className="h-full transition-all duration-300"
                     title={`${lang.name}: ${lang.percentage}%`}
                   />
                 ))}
               </div>
 
               {/* Legend */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5 mt-1 select-none">
                 {mockLanguages.map((lang) => (
                   <div key={lang.name} className="flex items-center gap-2">
                     <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: lang.color }} />
@@ -125,26 +126,26 @@ export default function GitHubStats() {
                 href="https://github.com/Prajwal-chougala"
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, x: 20 }}
+                initial={{ opacity: 0, x: 15 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.5, delay: idx * 0.05 }}
-                className="p-5 glass-card border border-border-subtle hover:border-accent-cyan/10 flex flex-col gap-3 group transition-all duration-300"
+                viewport={{ once: false, margin: '-80px' }}
+                transition={{ duration: 0.45, delay: idx * 0.05 }}
+                className="p-5 glass-card border border-border-subtle/50 hover:border-accent-cyan/15 flex flex-col gap-2.5 group transition-all duration-300 bg-surface/5"
               >
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center select-none">
                   <h4 className="text-sm font-bold text-text-heading font-mono group-hover:text-accent-cyan transition-colors">
                     {repo.name}
                   </h4>
-                  <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-surface border border-border-subtle text-text-muted">
+                  <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-surface border border-border-subtle text-text-muted">
                     Public
                   </span>
                 </div>
 
-                <p className="text-xs text-text-body/80 leading-relaxed">
+                <p className="text-xs text-text-body/80 font-sans font-light leading-relaxed">
                   {repo.description}
                 </p>
 
-                <div className="flex items-center gap-4 mt-1 text-[10px] font-mono text-text-muted">
+                <div className="flex items-center gap-4 mt-1 text-[10px] font-mono text-text-muted select-none">
                   <div className="flex items-center gap-1.5">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: repo.color }} />
                     <span>{repo.language}</span>
@@ -164,15 +165,15 @@ export default function GitHubStats() {
         </div>
 
         {/* View Profile */}
-        <div className="flex justify-center mt-12">
+        <div className="flex justify-center mt-12 select-none">
           <a
             href="https://github.com/Prajwal-chougala"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 rounded-lg border border-border-subtle hover:border-accent-cyan text-text-body text-xs font-bold font-mono tracking-wider uppercase flex items-center gap-2 transition-all cursor-pointer"
+            className="px-6 py-3 rounded-full border border-border-subtle hover:border-accent-cyan text-text-body text-xs font-bold font-mono tracking-wider uppercase flex items-center gap-2 transition-all cursor-pointer"
           >
             <Github className="w-4 h-4" />
-            Explore Full GitHub Profile
+            Explore GitHub Profile
           </a>
         </div>
       </div>

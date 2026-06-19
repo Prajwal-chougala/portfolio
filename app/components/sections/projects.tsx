@@ -22,12 +22,12 @@ const projectsData: Project[] = [
   {
     id: 'securefund',
     title: 'SecureFund',
-    subtitle: 'Blockchain-Powered Crowdfunding Platform',
+    subtitle: 'Blockchain Crowdfunding Platform',
     description: 'A decentralized, transparent platform built to prevent crowdfunding scams by automating disbursements through Solidity smart contracts.',
     icon: Shield,
     overview: 'SecureFund eliminates trust issues in traditional crowdfunding platforms by placing all transaction logic on-chain. Backers retain full control over where their funds go, releasing them in stages upon verification of project milestones.',
     problem: 'Traditional crowdfunding platforms suffer from lack of accountability. Project creators can disappear with raised funds, leading to scams and complete loss of capital for backers.',
-    solution: 'Designed smart contracts that escrow funds and release them to creators only after they submit progress proofs (milestones) which are voted on and approved by backers.',
+    solution: 'Designed smart escrow contracts that release funds to creators only after backers vote on and approve progress proofs (milestones) submitted on-chain.',
     techStack: ['React', 'Solidity', 'Web3.js', 'Node.js', 'Express.js', 'MongoDB', 'Hardhat'],
     github: 'https://github.com/Prajwal-chougala',
     demo: 'https://github.com/Prajwal-chougala',
@@ -35,12 +35,12 @@ const projectsData: Project[] = [
   {
     id: 'wat-wise',
     title: 'WAT-WISE',
-    subtitle: 'IoT + ML Energy Monitoring System',
+    subtitle: 'IoT + ML Energy Tracking System',
     description: 'An intelligent power monitoring system combining hardware IoT energy tracking with predictive machine learning forecasting.',
     icon: Zap,
     overview: 'WAT-WISE measures real-time electricity consumption using hardware sensors, transmits it to a backend dashboard, and predicts future power consumption spikes using regression forecasting models.',
     problem: 'Industrial and residential consumers struggle to understand real-time electricity leaks and find it difficult to forecast costs, resulting in huge energy waste.',
-    solution: 'Engineered an IoT ESP32 framework with current sensor nodes that streams real-time data to a dashboard, and trained a TensorFlow regression model to predict next-week energy spikes.',
+    solution: 'Engineered an IoT ESP32 framework with current sensor nodes streaming real-time metrics, paired with a TensorFlow model predicting next-week demand spikes.',
     techStack: ['Python', 'TensorFlow', 'IoT / ESP32', 'React', 'Node.js', 'Express.js', 'MongoDB'],
     github: 'https://github.com/Prajwal-chougala',
     demo: 'https://github.com/Prajwal-chougala',
@@ -53,7 +53,7 @@ const projectsData: Project[] = [
     icon: Users,
     overview: 'A robust administration system for medium-sized enterprises. It features multi-role permissions (Admin, HR, Manager, Employee) and fully automates complex workflows like leaves, onboarding, and appraisals.',
     problem: 'Manual spreadsheets and legacy HR systems lead to miscommunication, leave overlaps, and huge friction in internal company approvals.',
-    solution: 'Developed a unified portal with granular Role-Based Access Control (RBAC) and automated notifications. Includes dynamic calendar view of company-wide leaves.',
+    solution: 'Developed a unified portal with granular Role-Based Access Control (RBAC), automatic email alerts, and a dynamic calendar showing team-wide leaves.',
     techStack: ['React', 'Node.js', 'Express.js', 'MongoDB', 'JWT Auth', 'Tailwind CSS'],
     github: 'https://github.com/Prajwal-chougala',
     demo: 'https://github.com/Prajwal-chougala',
@@ -72,14 +72,14 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden bg-deep/50">
+    <section id="projects" className="py-24 relative overflow-hidden bg-deep/20 border-t border-border-subtle/25">
       <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
         {/* Title */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: false, margin: '-80px' }}
+          transition={{ duration: 0.5 }}
         >
           <h2 className="section-title">Case Studies</h2>
           <p className="section-subtitle">
@@ -88,7 +88,7 @@ export default function Projects() {
         </motion.div>
 
         {/* Project Cards Grid */}
-        <div className="flex flex-col gap-10 max-w-4xl mx-auto">
+        <div className="flex flex-col gap-8 max-w-4xl mx-auto">
           {projectsData.map((project, index) => {
             const ProjectIcon = project.icon;
             const activeTab = activeTabs[project.id];
@@ -96,65 +96,65 @@ export default function Projects() {
             return (
               <motion.div
                 key={project.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="p-6 md:p-8 glass-card border border-border-subtle hover:border-accent-cyan/20 transition-all duration-300"
+                viewport={{ once: false, margin: '-85px' }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                className="p-6 md:p-8 glass-card border border-border-subtle/50 hover:border-accent-cyan/15 transition-all duration-300 bg-surface/5"
               >
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-5">
                   {/* Header */}
                   <div className="flex justify-between items-start gap-4 flex-wrap">
                     <div className="flex items-center gap-3">
-                      <div className="p-3 rounded-lg bg-surface border border-border-subtle text-accent-cyan">
-                        <ProjectIcon className="w-6 h-6" />
+                      <div className="p-2.5 rounded-xl bg-surface border border-border-subtle text-accent-cyan">
+                        <ProjectIcon className="w-5 h-5" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-text-heading font-mono">
+                        <h3 className="text-lg font-bold text-text-heading font-mono leading-tight">
                           {project.title}
                         </h3>
-                        <p className="text-xs text-text-muted font-mono uppercase tracking-wider">
+                        <p className="text-[10px] text-text-muted font-mono uppercase tracking-wider mt-0.5">
                           {project.subtitle}
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex gap-3">
+                    <div className="flex gap-2 select-none">
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-lg border border-border-subtle hover:border-accent-cyan text-text-body transition-colors"
+                        className="p-2 rounded-full border border-border-subtle hover:border-accent-cyan text-text-body hover:text-accent-cyan transition-colors"
                         title="View Codebase"
                       >
-                        <Github className="w-5 h-5" />
+                        <Github className="w-4 h-4" />
                       </a>
                       {project.demo && (
                         <a
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-2 rounded-lg bg-accent-purple/20 hover:bg-accent-purple/30 border border-accent-purple/40 text-text-heading transition-colors"
+                          className="p-2 rounded-full bg-accent-purple/10 hover:bg-accent-purple/20 border border-accent-purple/20 hover:border-accent-purple/45 text-accent-purple transition-all"
                           title="Live Demo"
                         >
-                          <ExternalLink className="w-5 h-5" />
+                          <ExternalLink className="w-4 h-4" />
                         </a>
                       )}
                     </div>
                   </div>
 
                   {/* Short description */}
-                  <p className="text-text-body/90 leading-relaxed text-sm md:text-base">
+                  <p className="text-text-body/90 text-sm md:text-base font-light leading-relaxed">
                     {project.description}
                   </p>
 
                   {/* Tabs Selector */}
-                  <div className="flex border-b border-border-subtle/50">
+                  <div className="flex border-b border-border-subtle/40 select-none">
                     {(['overview', 'tech'] as const).map((tab) => (
                       <button
                         key={tab}
                         onClick={() => handleTabChange(project.id, tab)}
-                        className={`px-4 py-2 text-xs md:text-sm font-bold font-mono tracking-wider uppercase border-b-2 -mb-[2px] transition-colors cursor-pointer ${
+                        className={`px-4 py-2 text-xs font-bold font-mono tracking-wider uppercase border-b-2 -mb-[2px] transition-colors cursor-pointer ${
                           activeTab === tab
                             ? 'border-accent-cyan text-accent-cyan'
                             : 'border-transparent text-text-muted hover:text-text-body'
@@ -166,24 +166,24 @@ export default function Projects() {
                   </div>
 
                   {/* Tab Contents */}
-                  <div className="min-h-[140px] flex flex-col gap-4">
+                  <div className="min-h-[120px] flex flex-col gap-3 font-mono text-xs md:text-sm">
                     <AnimatePresence mode="wait">
                       {activeTab === 'overview' && (
                         <motion.div
                           key="overview"
-                          initial={{ opacity: 0, y: 10 }}
+                          initial={{ opacity: 0, y: 6 }}
                           animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
+                          exit={{ opacity: 0, y: -6 }}
                           transition={{ duration: 0.15 }}
-                          className="flex flex-col gap-4"
+                          className="flex flex-col gap-3"
                         >
                           <div>
-                            <span className="text-xs font-mono font-bold text-accent-purple/80 uppercase">Problem:</span>
-                            <p className="text-sm text-text-body/80 mt-1">{project.problem}</p>
+                            <span className="text-[10px] font-bold text-accent-purple uppercase tracking-wider">Problem:</span>
+                            <p className="text-sm text-text-body/80 mt-1 font-sans font-light leading-relaxed">{project.problem}</p>
                           </div>
                           <div>
-                            <span className="text-xs font-mono font-bold text-accent-teal/80 uppercase">Solution:</span>
-                            <p className="text-sm text-text-body/80 mt-1">{project.solution}</p>
+                            <span className="text-[10px] font-bold text-accent-teal uppercase tracking-wider">Solution:</span>
+                            <p className="text-sm text-text-body/80 mt-1 font-sans font-light leading-relaxed">{project.solution}</p>
                           </div>
                         </motion.div>
                       )}
@@ -191,18 +191,18 @@ export default function Projects() {
                       {activeTab === 'tech' && (
                         <motion.div
                           key="tech"
-                          initial={{ opacity: 0, y: 10 }}
+                          initial={{ opacity: 0, y: 6 }}
                           animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
+                          exit={{ opacity: 0, y: -6 }}
                           transition={{ duration: 0.15 }}
-                          className="flex flex-wrap gap-2 pt-2"
+                          className="flex flex-wrap gap-1.5 pt-1.5"
                         >
                           {project.techStack.map((tech) => (
                             <span
                               key={tech}
-                              className="px-3 py-1.5 rounded-lg bg-surface border border-border-subtle text-xs font-mono text-text-body flex items-center gap-1.5"
+                              className="px-3 py-1 rounded-full bg-surface border border-border-subtle/80 text-[11px] font-mono text-text-body flex items-center gap-1.5 hover:border-accent-cyan/35 transition-colors"
                             >
-                              <Code2 className="w-3.5 h-3.5 text-accent-cyan" />
+                              <Code2 className="w-3 h-3 text-accent-cyan" />
                               {tech}
                             </span>
                           ))}

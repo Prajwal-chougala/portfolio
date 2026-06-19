@@ -9,9 +9,9 @@ interface TimelineItem {
   subtitle: string;
   description: string;
   icon: LucideIcon;
-  accentColor: string;   // Tailwind text-* class
-  dotColor: string;      // raw hex for SVG
-  glowColor: string;     // raw rgba for glow
+  accentColor: string;
+  dotColor: string;
+  glowColor: string;
 }
 
 const timelineData: TimelineItem[] = [
@@ -23,7 +23,7 @@ const timelineData: TimelineItem[] = [
     icon: GraduationCap,
     accentColor: 'text-accent-cyan',
     dotColor: '#0ea5e9',
-    glowColor: 'rgba(14,165,233,0.35)',
+    glowColor: 'rgba(14,165,233,0.2)',
   },
   {
     year: '2024',
@@ -32,8 +32,8 @@ const timelineData: TimelineItem[] = [
     description: 'Mastered web architecture with MongoDB, Express, React, and Node.js. Built interactive portals and developed key projects.',
     icon: Code2,
     accentColor: 'text-accent-purple',
-    dotColor: '#0284c7',
-    glowColor: 'rgba(2,132,199,0.35)',
+    dotColor: '#a855f7',
+    glowColor: 'rgba(168,85,247,0.2)',
   },
   {
     year: '2025',
@@ -42,8 +42,8 @@ const timelineData: TimelineItem[] = [
     description: 'First professional role. Collaborated in a team of developers to write secure REST APIs, optimize databases, and build scalable components.',
     icon: Briefcase,
     accentColor: 'text-accent-teal',
-    dotColor: '#0d9488',
-    glowColor: 'rgba(13,148,136,0.35)',
+    dotColor: '#14b8a6',
+    glowColor: 'rgba(20,184,166,0.2)',
   },
   {
     year: '2025',
@@ -52,8 +52,8 @@ const timelineData: TimelineItem[] = [
     description: 'Finalist out of hundreds of entries. Co-organized the INVENTRA-2K25 national hackathon. Discovered the thrill of rapid building.',
     icon: Trophy,
     accentColor: 'text-accent-magenta',
-    dotColor: '#2563eb',
-    glowColor: 'rgba(37,99,235,0.35)',
+    dotColor: '#f43f5e',
+    glowColor: 'rgba(244,63,94,0.2)',
   },
   {
     year: '2026',
@@ -63,7 +63,7 @@ const timelineData: TimelineItem[] = [
     icon: Brain,
     accentColor: 'text-accent-cyan',
     dotColor: '#0ea5e9',
-    glowColor: 'rgba(14,165,233,0.35)',
+    glowColor: 'rgba(14,165,233,0.2)',
   },
   {
     year: 'Future',
@@ -72,77 +72,46 @@ const timelineData: TimelineItem[] = [
     description: 'Committed to solving real-world challenges by establishing high-agency, automated platforms that make advanced AI accessible.',
     icon: Rocket,
     accentColor: 'text-accent-purple',
-    dotColor: '#0284c7',
-    glowColor: 'rgba(2,132,199,0.35)',
+    dotColor: '#a855f7',
+    glowColor: 'rgba(168,85,247,0.2)',
   },
 ];
 
-/* ── Curved SVG branch connector ─────────────────────── */
 function BranchSVG({ side, color }: { side: 'left' | 'right'; color: string }) {
-  // The branch curves from the trunk outward to the card
-  // Left card: branch goes trunk → left   (mirror horizontally)
-  // Right card: branch goes trunk → right
   const path =
     side === 'right'
-      ? 'M 0,40 C 30,40 30,20 60,20' // curve right
-      : 'M 60,40 C 30,40 30,20 0,20'; // curve left
+      ? 'M 0,40 C 20,40 20,20 45,20'
+      : 'M 45,40 C 20,40 20,20 0,20';
 
   return (
     <svg
       className="absolute top-6 hidden md:block pointer-events-none"
-      style={side === 'right' ? { left: 'calc(50% + 18px)' } : { right: 'calc(50% + 18px)' }}
-      width="60"
+      style={side === 'right' ? { left: 'calc(50% + 14px)' } : { right: 'calc(50% + 14px)' }}
+      width="45"
       height="50"
-      viewBox="0 0 60 50"
+      viewBox="0 0 45 50"
       fill="none"
     >
       <path
         d={path}
         stroke={color}
-        strokeWidth="2"
+        strokeWidth="1.5"
         strokeLinecap="round"
-        opacity="0.5"
+        opacity="0.3"
       />
     </svg>
   );
 }
 
-/* ── Glowing tree node on the trunk ──────────────────── */
 function TreeNode({ dotColor, glowColor }: { dotColor: string; glowColor: string }) {
   return (
-    <div
-      className="absolute left-1/2 -translate-x-1/2 top-7 z-20 hidden md:flex items-center justify-center"
-    >
-      {/* Outer glow ring */}
+    <div className="absolute left-1/2 -translate-x-1/2 top-7 z-20 hidden md:flex items-center justify-center select-none pointer-events-none">
       <div
-        className="absolute w-9 h-9 rounded-full animate-pulse"
-        style={{ backgroundColor: glowColor }}
-      />
-      {/* Outer ring */}
-      <div
-        className="w-5 h-5 rounded-full border-2 flex items-center justify-center"
-        style={{ borderColor: dotColor, backgroundColor: 'var(--color-deep)' }}
-      >
-        {/* Inner dot */}
-        <div
-          className="w-2 h-2 rounded-full"
-          style={{ backgroundColor: dotColor }}
-        />
-      </div>
-    </div>
-  );
-}
-
-/* ── Mobile-only node (left-aligned) ──────────────────── */
-function MobileNode({ dotColor, glowColor }: { dotColor: string; glowColor: string }) {
-  return (
-    <div className="absolute left-[22px] top-7 z-20 flex md:hidden items-center justify-center">
-      <div
-        className="absolute w-8 h-8 rounded-full animate-pulse"
+        className="absolute w-7 h-7 rounded-full animate-pulse"
         style={{ backgroundColor: glowColor }}
       />
       <div
-        className="w-4 h-4 rounded-full border-2 flex items-center justify-center"
+        className="w-3.5 h-3.5 rounded-full border flex items-center justify-center"
         style={{ borderColor: dotColor, backgroundColor: 'var(--color-deep)' }}
       >
         <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: dotColor }} />
@@ -151,54 +120,62 @@ function MobileNode({ dotColor, glowColor }: { dotColor: string; glowColor: stri
   );
 }
 
-/* ── Timeline Card ────────────────────────────────────── */
+function MobileNode({ dotColor, glowColor }: { dotColor: string; glowColor: string }) {
+  return (
+    <div className="absolute left-[20px] top-7 z-20 flex md:hidden items-center justify-center select-none pointer-events-none">
+      <div
+        className="absolute w-6 h-6 rounded-full animate-pulse"
+        style={{ backgroundColor: glowColor }}
+      />
+      <div
+        className="w-3 h-3 rounded-full border flex items-center justify-center"
+        style={{ borderColor: dotColor, backgroundColor: 'var(--color-deep)' }}
+      >
+        <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: dotColor }} />
+      </div>
+    </div>
+  );
+}
+
 function TimelineCard({ item, side }: { item: TimelineItem; side: 'left' | 'right' }) {
   const ItemIcon = item.icon;
   const isRight = side === 'right';
 
   return (
-    <div
-      className={`w-full md:w-[calc(50%-60px)] ${
-        isRight ? 'md:ml-auto' : 'md:mr-auto'
-      }`}
-    >
-      <div className="p-5 md:p-6 glass-card border border-border-subtle hover:border-accent-cyan/30 transition-all duration-300 group relative overflow-hidden">
-        {/* Subtle top accent bar */}
+    <div className={`w-full md:w-[calc(50%-45px)] ${isRight ? 'md:ml-auto' : 'md:mr-auto'}`}>
+      <div className="p-5 md:p-6 glass-card border border-border-subtle/50 hover:border-accent-cyan/20 transition-all duration-300 group relative overflow-hidden bg-surface/5">
         <div
-          className="absolute top-0 left-0 right-0 h-[2px] opacity-60"
+          className="absolute top-0 left-0 right-0 h-[1.5px] opacity-40"
           style={{
             background: `linear-gradient(90deg, transparent 0%, ${item.dotColor} 50%, transparent 100%)`,
           }}
         />
 
-        {/* Header Row */}
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="flex flex-col">
-            <span
-              className={`text-xs font-bold font-mono tracking-[0.2em] uppercase ${item.accentColor}`}
-            >
+            <span className={`text-[10px] font-bold font-mono tracking-widest uppercase ${item.accentColor}`}>
               {item.year}
             </span>
-            <h3 className="text-lg font-bold text-text-heading font-mono mt-1 leading-tight">
+            <h3 className="text-base font-bold text-text-heading font-mono mt-1 leading-tight">
               {item.title}
             </h3>
           </div>
           <div
-            className="p-2.5 rounded-xl border transition-colors duration-300 shrink-0"
+            className="p-2 rounded-xl border transition-colors duration-300 shrink-0"
             style={{
-              borderColor: `${item.dotColor}30`,
-              backgroundColor: `${item.dotColor}08`,
+              borderColor: `${item.dotColor}20`,
+              backgroundColor: `${item.dotColor}05`,
             }}
           >
-            <ItemIcon className="w-5 h-5" style={{ color: item.dotColor }} />
+            <ItemIcon className="w-4.5 h-4.5" style={{ color: item.dotColor }} />
           </div>
         </div>
 
-        <p className={`text-xs font-mono uppercase tracking-wider mb-2.5 ${item.accentColor} opacity-80`}>
+        <p className={`text-[10px] font-mono uppercase tracking-wider mb-2.5 ${item.accentColor} opacity-75`}>
           {item.subtitle}
         </p>
 
-        <p className="text-sm text-text-body/80 leading-relaxed">
+        <p className="text-xs md:text-sm text-text-body/80 font-sans font-light leading-relaxed">
           {item.description}
         </p>
       </div>
@@ -206,19 +183,16 @@ function TimelineCard({ item, side }: { item: TimelineItem; side: 'left' | 'righ
   );
 }
 
-/* ════════════════════════════════════════════════════════
-   MAIN TIMELINE COMPONENT
-   ════════════════════════════════════════════════════════ */
 export default function Timeline() {
   return (
-    <section id="timeline" className="py-24 relative overflow-hidden bg-deep/50">
+    <section id="timeline" className="py-24 relative overflow-hidden bg-deep/20 border-t border-border-subtle/25">
       <div className="max-w-5xl mx-auto px-4 md:px-8 relative z-10">
         {/* Title */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: false, margin: '-80px' }}
+          transition={{ duration: 0.5 }}
         >
           <h2 className="section-title">Timeline</h2>
           <p className="section-subtitle">
@@ -226,47 +200,34 @@ export default function Timeline() {
           </p>
         </motion.div>
 
-        {/* ── Tree Body ────────────────────────────── */}
+        {/* Tree Body */}
         <div className="relative mt-16">
-          {/* ── Central trunk (desktop) ── */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] hidden md:block">
-            {/* Gradient trunk line */}
+          {/* Central trunk (desktop) */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[1px] hidden md:block">
             <div
               className="w-full h-full"
               style={{
                 background:
                   'linear-gradient(to bottom, var(--color-accent-cyan) 0%, var(--color-accent-purple) 50%, var(--color-accent-magenta) 100%)',
-                opacity: 0.25,
+                opacity: 0.15,
               }}
             />
           </div>
 
-          {/* ── Mobile trunk (left-aligned) ── */}
-          <div className="absolute left-[22px] top-0 bottom-0 w-[2px] md:hidden">
+          {/* Mobile trunk (left-aligned) */}
+          <div className="absolute left-[20px] top-0 bottom-0 w-[1px] md:hidden">
             <div
               className="w-full h-full"
               style={{
                 background:
                   'linear-gradient(to bottom, var(--color-accent-cyan) 0%, var(--color-accent-purple) 50%, var(--color-accent-magenta) 100%)',
-                opacity: 0.25,
+                opacity: 0.15,
               }}
             />
           </div>
 
-          {/* ── Root base (bottom of trunk, desktop) ── */}
-          <div className="absolute left-1/2 -translate-x-1/2 -bottom-4 hidden md:flex flex-col items-center gap-1">
-            <div className="w-3 h-3 rounded-full bg-accent-purple/30 border border-accent-purple/50" />
-            <div className="w-1.5 h-1.5 rounded-full bg-accent-purple/20" />
-          </div>
-
-          {/* ── Top crown (top of trunk, desktop) ── */}
-          <div className="absolute left-1/2 -translate-x-1/2 -top-4 hidden md:flex flex-col items-center gap-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-accent-cyan/20" />
-            <div className="w-3 h-3 rounded-full bg-accent-cyan/30 border border-accent-cyan/50" />
-          </div>
-
-          {/* ── Timeline Entries ── */}
-          <div className="flex flex-col gap-12 md:gap-16">
+          {/* Timeline Entries */}
+          <div className="flex flex-col gap-8 md:gap-12">
             {timelineData.map((item, index) => {
               const side: 'left' | 'right' = index % 2 === 0 ? 'left' : 'right';
 
@@ -275,23 +236,16 @@ export default function Timeline() {
                   key={index}
                   initial={{
                     opacity: 0,
-                    x: side === 'left' ? -40 : 40,
+                    x: side === 'left' ? -25 : 25,
                   }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-80px' }}
-                  transition={{ duration: 0.6, delay: index * 0.08, ease: 'easeOut' }}
-                  className="relative pl-12 md:pl-0"
+                  viewport={{ once: false, margin: '-80px' }}
+                  transition={{ duration: 0.5, delay: index * 0.05, ease: 'easeOut' }}
+                  className="relative pl-10 md:pl-0"
                 >
-                  {/* Desktop tree node */}
                   <TreeNode dotColor={item.dotColor} glowColor={item.glowColor} />
-
-                  {/* Mobile tree node */}
                   <MobileNode dotColor={item.dotColor} glowColor={item.glowColor} />
-
-                  {/* SVG branch connector (desktop only) */}
                   <BranchSVG side={side} color={item.dotColor} />
-
-                  {/* Card */}
                   <TimelineCard item={item} side={side} />
                 </motion.div>
               );
