@@ -5,6 +5,7 @@ import Navbar from './components/layout/navbar';
 import Footer from './components/layout/footer';
 import AntigravityBackground from './components/effects/antigravity-background';
 import SplashScreen from './components/effects/splash-screen';
+import AiChatButton from './components/layout/ai-chat-button';
 
 const inter = Inter({
   variable: '--font-geist-sans',
@@ -89,6 +90,7 @@ export default function RootLayout({
           <main className="flex-1 w-full relative z-10">{children}</main>
           <Footer />
         </SplashScreen>
+        <AiChatButton />
       </body>
     </html>
   );
