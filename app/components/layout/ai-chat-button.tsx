@@ -90,17 +90,25 @@ export default function AiChatButton() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isChatOpen]);
 
-  // Prevent body scroll when chat is open on mobile
+  // Prevent body scroll when chat is open on mobile or maximized
   useEffect(() => {
-    if (isChatOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    const handleScrollLock = () => {
+      const isMobile = window.innerWidth < 640; // sm breakpoint in tailwind
+      if (isChatOpen && (isMobile || isMaximized)) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    };
+
+    handleScrollLock();
+    window.addEventListener('resize', handleScrollLock);
+    
     return () => {
+      window.removeEventListener('resize', handleScrollLock);
       document.body.style.overflow = '';
     };
-  }, [isChatOpen]);
+  }, [isChatOpen, isMaximized]);
 
   const toggleChat = useCallback(() => {
     setIsChatOpen((prev) => !prev);
