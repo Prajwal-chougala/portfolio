@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { motion } from 'motion/react';
 
 export default function AiChatButton() {
   const [isHovered, setIsHovered] = useState(false);
@@ -117,7 +118,12 @@ export default function AiChatButton() {
           />
 
           {/* Chat container */}
-          <div
+          <motion.div
+            drag
+            dragMomentum={false}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="
               fixed z-[999]
               inset-2 sm:inset-auto
@@ -135,12 +141,11 @@ export default function AiChatButton() {
               WebkitBackdropFilter: 'blur(20px)',
               boxShadow:
                 '0 25px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--theme-glass-border, rgba(255,255,255,0.08)), 0 0 40px rgba(139, 92, 246, 0.15)',
-              animation: 'chatWindowOpen 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards',
             }}
           >
             {/* Chat Header */}
             <div
-              className="flex items-center justify-between px-4 py-3 shrink-0"
+              className="flex items-center justify-between px-4 py-3 shrink-0 cursor-grab active:cursor-grabbing"
               style={{
                 background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(6, 182, 212, 0.1))',
                 borderBottom: '1px solid var(--theme-glass-border, rgba(255,255,255,0.08))',
@@ -220,7 +225,7 @@ export default function AiChatButton() {
               onLoad={handleIframeLoad}
               allow="microphone"
             />
-          </div>
+          </motion.div>
         </>
       )}
 
