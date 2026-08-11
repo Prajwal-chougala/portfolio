@@ -8,6 +8,7 @@ export default function AiChatButton() {
   const [isPulsing, setIsPulsing] = useState(true);
   const [showTooltip, setShowTooltip] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isMaximized, setIsMaximized] = useState(false);
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [currentTheme, setCurrentTheme] = useState<'dark' | 'light'>('dark');
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -104,7 +105,10 @@ export default function AiChatButton() {
   const toggleChat = useCallback(() => {
     setIsChatOpen((prev) => !prev);
     setShowTooltip(false);
-  }, []);
+    if (isChatOpen) {
+      setIsMaximized(false); // Reset maximize state when closing
+    }
+  }, [isChatOpen]);
 
   return (
     <>
@@ -119,21 +123,26 @@ export default function AiChatButton() {
 
           {/* Chat container */}
           <motion.div
-            drag
+            drag={!isMaximized}
             dragMomentum={false}
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
+            animate={{ 
+              opacity: 1, 
+              y: 0, 
+              scale: 1,
+              width: isMaximized ? 'calc(100vw - 32px)' : undefined,
+              height: isMaximized ? 'calc(100vh - 32px)' : undefined,
+              left: isMaximized ? '16px' : undefined,
+              top: isMaximized ? '16px' : undefined,
+            }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="
+            className={`
               fixed z-[999]
-              inset-2 sm:inset-auto
-              sm:bottom-24 sm:right-6
-              sm:w-[400px] sm:h-[580px]
-              md:w-[420px] md:h-[600px]
               flex flex-col
               rounded-2xl overflow-hidden
               shadow-2xl
-            "
+              ${!isMaximized ? 'inset-2 sm:inset-auto sm:bottom-24 sm:right-6 sm:w-[400px] sm:h-[580px] md:w-[420px] md:h-[600px]' : 'w-auto h-auto'}
+            `}
             style={{
               background: 'var(--theme-glass-bg, rgba(15, 15, 25, 0.95))',
               border: '1px solid var(--theme-glass-border, rgba(255,255,255,0.1))',
@@ -181,21 +190,44 @@ export default function AiChatButton() {
                 </div>
               </div>
 
-              {/* Close button */}
-              <button
-                onClick={() => setIsChatOpen(false)}
-                className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.06)',
-                  color: 'var(--color-text-body, #ccc)',
-                }}
-                aria-label="Close chat"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-              </button>
+              <div className="flex items-center gap-2">
+                {/* Maximize button */}
+                <button
+                  onClick={() => setIsMaximized(!isMaximized)}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.06)',
+                    color: 'var(--color-text-body, #ccc)',
+                  }}
+                  aria-label={isMaximized ? "Restore chat" : "Maximize chat"}
+                >
+                  {isMaximized ? (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" />
+                    </svg>
+                  ) : (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    </svg>
+                  )}
+                </button>
+
+                {/* Close button */}
+                <button
+                  onClick={() => setIsChatOpen(false)}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.06)',
+                    color: 'var(--color-text-body, #ccc)',
+                  }}
+                  aria-label="Close chat"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+              </div>
             </div>
 
             {/* Loading indicator */}
