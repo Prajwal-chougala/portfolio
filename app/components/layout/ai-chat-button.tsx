@@ -125,15 +125,16 @@ export default function AiChatButton() {
           <motion.div
             drag={!isMaximized}
             dragMomentum={false}
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ 
               opacity: 1, 
-              y: 0, 
               scale: 1,
-              width: isMaximized ? 'calc(100vw - 32px)' : undefined,
-              height: isMaximized ? 'calc(100vh - 32px)' : undefined,
-              left: isMaximized ? '16px' : undefined,
-              top: isMaximized ? '16px' : undefined,
+              x: isMaximized ? 0 : undefined,
+              y: isMaximized ? 0 : undefined,
+              width: isMaximized ? 'calc(100vw - 32px)' : '',
+              height: isMaximized ? 'calc(100vh - 32px)' : '',
+              left: isMaximized ? '16px' : '',
+              top: isMaximized ? '16px' : '',
             }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className={`
