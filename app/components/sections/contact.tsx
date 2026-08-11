@@ -12,16 +12,44 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
     setStatus('loading');
-    setTimeout(() => {
-      setStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          // You need to add this key in your .env.local file or replace it here
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY || 'YOUR_ACCESS_KEY_HERE',
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject || 'New message from your portfolio',
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 5000);
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
-    }, 1500);
+    }
   };
 
   const socialLinks = [
