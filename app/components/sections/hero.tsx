@@ -3,6 +3,7 @@
 import { motion } from 'motion/react';
 import { Download, Github, Mail, ArrowDown, Globe, Sparkles } from 'lucide-react';
 import { useLoading } from '../effects/splash-screen';
+import WarpText from '../react-bits/WarpText';
 
 export default function Hero() {
   const { isLoaded } = useLoading();
@@ -59,61 +60,23 @@ export default function Hero() {
             Engineering Intelligent Workflows
           </motion.div>
 
-          <h1 className="text-[9.8vw] xs:text-[9.5vw] sm:text-[9vw] md:text-[6.5vw] font-black tracking-tighter leading-[0.85] font-display mb-8 text-text-heading select-none flex flex-col items-center md:items-start w-full overflow-hidden">
-            {/* First Name */}
-            <span className="flex flex-nowrap justify-center md:justify-start">
-              {firstName.map((char, i) => (
-                <motion.span
-                  key={`first-${i}`}
-                  initial={{ y: -80, opacity: 0 }}
-                  animate={isLoaded ? { y: 0, opacity: 1 } : { y: -80, opacity: 0 }}
-                  transition={{
-                    type: 'spring',
-                    stiffness: 100,
-                    damping: 10,
-                    delay: i * 0.04,
-                  }}
-                  whileHover={{
-                    y: -5,
-                    scale: 1.05,
-                  }}
-                  className={`inline-block transition-all duration-200 cursor-default ${
-                    i % 2 === 0
-                      ? 'hover:text-accent-purple dark:hover:[text-shadow:0_0_15px_var(--color-accent-purple)]'
-                      : 'hover:text-accent-cyan dark:hover:[text-shadow:0_0_15px_var(--color-accent-cyan)]'
-                  }`}
-                >
-                  {char}
-                </motion.span>
-              ))}
-            </span>
-            {/* Last Name */}
-            <span className="flex flex-nowrap justify-center md:justify-start mt-2">
-              {lastName.map((char, i) => (
-                <motion.span
-                  key={`last-${i}`}
-                  initial={{ y: -80, opacity: 0 }}
-                  animate={isLoaded ? { y: 0, opacity: 1 } : { y: -80, opacity: 0 }}
-                  transition={{
-                    type: 'spring',
-                    stiffness: 100,
-                    damping: 10,
-                    delay: (firstName.length + i) * 0.04,
-                  }}
-                  whileHover={{
-                    y: -5,
-                    scale: 1.05,
-                  }}
-                  className={`inline-block transition-all duration-200 cursor-default ${
-                    i % 2 === 0
-                      ? 'hover:text-accent-purple dark:hover:[text-shadow:0_0_15px_var(--color-accent-purple)]'
-                      : 'hover:text-accent-cyan dark:hover:[text-shadow:0_0_15px_var(--color-accent-cyan)]'
-                  }`}
-                >
-                  {char}
-                </motion.span>
-              ))}
-            </span>
+          <h1 className="mb-8 w-full flex justify-center md:justify-start">
+            <WarpText
+              text={`PRAJWAL ${'\n'}CHOUGALA`}
+              color="#f8f5ff"
+              warpStrength={0.08}
+              warpScale={1.7}
+              speed={0.55}
+              pointerInfluence={0.42}
+              pointerStrength={0.38}
+              refraction={0.018}
+              ripple
+              fontSize="clamp(3rem, 9.5vw, 9rem)"
+              fontWeight={900}
+              letterSpacing="-0.04em"
+              lineHeight={0.85}
+              style={{ width: '100%', height: '320px', fontFamily: 'var(--font-display), sans-serif' }}
+            />
           </h1>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mt-4">
