@@ -75,7 +75,7 @@ export default function Navbar() {
               className="flex items-center gap-2 group mr-1"
             >
               <div className="w-7 h-7 rounded-full overflow-hidden border-2 border-accent-purple/30 group-hover:border-accent-cyan/50 transition-colors relative pointer-events-none">
-                <Image src="/profile-v3.png" alt="Prajwal" fill className="object-cover object-top" sizes="28px" />
+                <Image src="/profile.jpg" alt="Prajwal" fill className="object-cover object-top" sizes="28px" />
               </div>
               <span className="font-mono text-xs font-extrabold tracking-widest gradient-text-purple pointer-events-none whitespace-nowrap">
                 PRAJWAL CHOUGALA

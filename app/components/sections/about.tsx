@@ -74,7 +74,7 @@ export default function About() {
               {/* Photo Container */}
               <div className="absolute inset-4 rounded-xl overflow-hidden bg-deep">
                 <Image
-                  src="/profile-v3.png"
+                  src="/profile.jpg"
                   alt="Prajwal Chougala"
                   fill
                   className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
